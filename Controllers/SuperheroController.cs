@@ -74,8 +74,9 @@ namespace SuperHero.Controllers
         }
 
         // GET: SuperheroController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Superhero superhero)
         {
+            _context.Superheroes.Remove(superhero);
             return View();
         }
 
