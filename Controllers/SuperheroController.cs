@@ -55,13 +55,14 @@ namespace SuperHero.Controllers
         // GET: SuperheroController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var editing = _context.Superheroes.Where(e => e.SuperheroId == id).FirstOrDefault();
+            return View(editing);
         }
 
         // POST: SuperheroController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Superhero superhero)
         {
             try
             {
@@ -74,9 +75,10 @@ namespace SuperHero.Controllers
         }
 
         // GET: SuperheroController/Delete/5
-        public ActionResult Delete(Superhero superhero)
+        public ActionResult Delete(Superhero superhero )
         {
             _context.Superheroes.Remove(superhero);
+            _context.SaveChanges();
             return View();
         }
 
