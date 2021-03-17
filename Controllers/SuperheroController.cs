@@ -66,6 +66,9 @@ namespace SuperHero.Controllers
         {
             try
             {
+                var duperhero = _context.Superheroes.Where(s => s.SuperheroId == id).FirstOrDefault();
+                _context.Superheroes.Remove(duperhero);
+                _context.Superheroes.Add(superhero);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,9 +78,10 @@ namespace SuperHero.Controllers
         }
 
         // GET: SuperheroController/Delete/5
-        public ActionResult Delete(Superhero superhero )
+        public ActionResult Delete(int id)
         {
-            _context.Superheroes.Remove(superhero);
+            var duperhero = _context.Superheroes.Where(s => s.SuperheroId == id).FirstOrDefault();
+            _context.Superheroes.Remove(duperhero);
             _context.SaveChanges();
             return View();
         }
